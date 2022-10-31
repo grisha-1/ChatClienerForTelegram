@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 import telebot
 import matbi
 
-bot = telebot.TeleBot("5151066340:AAGxI-5HIyEtlJeJL3WwX67wUvTUqZaZshQ")
+bot = telebot.TeleBot("здесь ваш токен")
 words = matbi.censured
 
 
@@ -27,30 +27,10 @@ def distance(a, b):
 
 
 @bot.message_handler(commands=['start'])
-def star(m, res=False):
+def start(m, res=False):
     bot.send_message(m.chat.id, 'отправь, что-либо, а я поищу на википедии')
-
-
-@bot.message_handler(commands=['weather'])
-def weather(m, res=False):
-    bot.send_message(m.chat.id, '454565')
-    print(6)
-    url = 'https://yandex.ru/pogoda/details?lat=47.222078&lon=39.720349&via=ms'
-    response = requests.get(url)
-    soup = BeautifulSoup(response.text, 'lxml')
-    quotes = soup.find('div', class_="b-page__container").find('div', class_="content").find('div', class_="forecast"
                                                                                                            "-details"
-                                                                                                           "-segment").\
-        find('div', class_="forecast-details-segment__container").find('div', class_="forecast-details i-bem "
-                                                                                     "forecast-details_js_inited").find(
-        "article", class_="card").find("div", class_="forecast-details__day-info").find('table', class_="weather-table")\
-        .find("tbody", class_="weather-table__body").find_all("tr", class_="weather-table__row")
-    print(quotes)
-    for item in quotes:
-        print(item.text)
-    bot.send_message(m.chat.id, 'Погода сейчас: ' + '')
-
-
+                                          
 @bot.message_handler(content_types=["text"])
 def cleaner(message):
     print(message)
